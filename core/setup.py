@@ -28,7 +28,33 @@ package_name = "dbt-core"
 package_version = "1.2.0a1"
 description = """With dbt, data analysts and engineers can build analytics \
 the way engineers build applications."""
+install_requires = [
+    "Jinja2==2.11.3",
+    "MarkupSafe>=0.23,<2.1",
+    "agate>=1.6,<1.6.4",
+    "click>=7.0,<9",
+    "colorama>=0.3.9,<0.4.5",
+    "hologram>=0.0.14,<=0.0.15",
+    "isodate>=0.6,<0.7",
+    "logbook>=1.5,<1.6",
+    "mashumaro==2.9",
+    "minimal-snowplow-tracker==0.0.2",
+    "packaging>=20.9,<22.0",
+    "sqlparse>=0.2.3,<0.5",
+    "dbt-extractor~=0.4.1",
+    "typing-extensions>=3.7.4",
+    "werkzeug>=1,<3",
+    # the following are all to match snowflake-connector-python
+    "requests<3.0.0",
+    "idna>=2.5,<4",
+    "cffi>=1.9,<2.0.0",
+]
 
+# we check python version > 3.7.2 above so this will make sure we are using python 3.7
+if sys.version_info < (3, 8):
+    install_requires.append("networkx>=2.3,<2.8.1")
+else:
+    install_requires.append("networkx>=2.3,<3")
 
 setup(
     name=package_name,
@@ -50,28 +76,7 @@ setup(
     scripts=[
         "scripts/dbt",
     ],
-    install_requires=[
-        "Jinja2==2.11.3",
-        "MarkupSafe>=0.23,<2.1",
-        "agate>=1.6,<1.6.4",
-        "click>=7.0,<9",
-        "colorama>=0.3.9,<0.4.5",
-        "hologram>=0.0.14,<=0.0.15",
-        "isodate>=0.6,<0.7",
-        "logbook>=1.5,<1.6",
-        "mashumaro==2.9",
-        "minimal-snowplow-tracker==0.0.2",
-        "networkx>=2.3,<3",
-        "packaging>=20.9,<22.0",
-        "sqlparse>=0.2.3,<0.5",
-        "dbt-extractor~=0.4.1",
-        "typing-extensions>=3.7.4",
-        "werkzeug>=1,<3",
-        # the following are all to match snowflake-connector-python
-        "requests<3.0.0",
-        "idna>=2.5,<4",
-        "cffi>=1.9,<2.0.0",
-    ],
+    install_requires=install_requires,
     zip_safe=False,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
