@@ -17,7 +17,7 @@ class RelationType(StrEnum):
     Table = "table"
     View = "view"
     CTE = "cte"
-    MaterializedView = "materializedview"
+    MaterializedView = "materialized view"
     External = "external"
 
 
