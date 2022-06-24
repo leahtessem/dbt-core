@@ -29,6 +29,9 @@
     {{ handle_existing_table(should_full_refresh(), old_relation) }}
   {%- endif -%}
 
+  {%- if old_relation is not none and old_relation.is_materializedview -%}
+    {{ handle_existing_table(should_full_refresh(), old_relation) }}
+  {%- endif -%}
   -- build model
   {% call statement('main') -%}
     {{ get_create_view_as_sql(target_relation, sql) }}
